@@ -2,10 +2,15 @@ package com.example.SpringDataJPA.entity.user;
 
 import jakarta.persistence.*;
 
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
-
+@Setter
+@Getter
+@Data
 @Entity
 @Table(name = "java_user_001")
 @DynamicInsert
@@ -18,6 +23,7 @@ public class UserEntity {
     private String userName;
     @Column(columnDefinition = "varchar(255) comment 'user email'", nullable = false, unique = true)
     private String userEmail;
+
     @Override
     public String toString() {
         return "UserEntity{" +
@@ -26,22 +32,5 @@ public class UserEntity {
                 ", userEmail='" + userEmail + '\'' +
                 '}';
     }
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
-    public String getUserName() {
-        return userName;
-    }
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-    public String getUserEmail() {
-        return userEmail;
-    }
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
-    }
+
 }

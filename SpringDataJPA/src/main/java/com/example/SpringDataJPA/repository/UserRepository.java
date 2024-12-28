@@ -2,6 +2,8 @@ package com.example.SpringDataJPA.repository;
 
 import com.example.SpringDataJPA.entity.user.UserEntity;
 import jakarta.transaction.Transactional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Modifying;
@@ -17,6 +19,9 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<UserEntity, Long>, JpaSpecificationExecutor<UserEntity> {
     //find userName and userEmail
     UserEntity findByUserNameAndUserEmail(String userName, String userEmail);
+
+    //Page<UserEntity> findAllOne(Pageable pageable);
+
     //find userName
     UserEntity findByUserName(String userName);
 
@@ -28,7 +33,7 @@ public interface UserRepository extends JpaRepository<UserEntity, Long>, JpaSpec
     UserEntity findMaxIdUser();
 
     @Query("SELECT u FROM UserEntity u WHERE u.userName = ?1 AND u.userEmail = ?2")
-    List<UserEntity> findByUserName(String userName, String userEmail);
+    List<UserEntity> findByUserNameOne(String userName, String userEmail);
 
     @Query("SELECT u FROM UserEntity u WHERE u.userName= :userName AND u.userEmail= :userEmail")
     List<UserEntity> findByUserNameTwo(@Param("userName") String userName, @Param("userEmail") String userEmail);
